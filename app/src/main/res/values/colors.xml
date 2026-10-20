@@ -1,3 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bg">#FF070A14</color>
+    <color name="bg_top">#0B1026</color>
+    <color name="bg_mid">#1B1147</color>
+    <color name="bg_bottom">#2A0F4A</color>
+    <color name="cyan">#22D3EE</color>
+    <color name="purple">#8B5CF6</color>
+    <color name="pink">#EC4899</color>
+    <color name="text_soft">#A5B4FC</color>
 </resources>

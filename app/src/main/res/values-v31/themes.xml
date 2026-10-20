@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.GameBooster" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/purple</item>
+        <item name="android:statusBarColor">@color/bg_top</item>
+        <item name="android:navigationBarColor">@color/bg_bottom</item>
+        <item name="android:windowBackground">@color/bg_top</item>
+        <item name="android:windowSplashScreenBackground">@color/bg_mid</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_fg</item>
+    </style>
+</resources>

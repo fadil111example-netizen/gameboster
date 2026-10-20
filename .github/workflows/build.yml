@@ -1,19 +1,17 @@
-name: Build Game Boost APK
+name: Build APK
 
 on:
   push:
     branches: [ main, master ]
-    tags: [ 'v*' ]
   pull_request:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,57 +20,18 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: 17
 
-      - name: Siapkan Android SDK
-        run: |
-          SDKM="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
-          if [ ! -x "$SDKM" ]; then
-            SDKM="$(ls $ANDROID_HOME/cmdline-tools/*/bin/sdkmanager | head -n 1)"
-          fi
-          echo "sdkmanager: $SDKM"
-          yes | "$SDKM" --licenses > /dev/null || true
-          "$SDKM" "platforms;android-34" "build-tools;34.0.0" "platform-tools"
-
-      - name: Setup Gradle
+      - name: Setup Gradle 8.7
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.9'
+          gradle-version: 8.7
 
-      - name: Buat Gradle Wrapper
-        run: |
-          if [ ! -f gradle/wrapper/gradle-wrapper.jar ]; then
-            gradle wrapper --gradle-version 8.9 --distribution-type bin
-          fi
-          chmod +x gradlew
+      - name: Build Debug APK
+        run: gradle assembleDebug --stacktrace
 
-      - name: Build APK (debug + release)
-        run: ./gradlew assembleDebug assembleRelease --stacktrace
-
-      - name: Upload debug APK
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: GameBoost-debug
+          name: GameBooster-debug-apk
           path: app/build/outputs/apk/debug/*.apk
-
-      - name: Upload release APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: GameBoost-release
-          path: app/build/outputs/apk/release/*.apk
-
-      - name: Upload Gradle Wrapper
-        uses: actions/upload-artifact@v4
-        with:
-          name: gradle-wrapper-files
-          path: |
-            gradlew
-            gradlew.bat
-            gradle/wrapper/gradle-wrapper.jar
-            gradle/wrapper/gradle-wrapper.properties
-
-      - name: Publish GitHub Release (saat push tag v*)
-        if: startsWith(github.ref, 'refs/tags/v')
-        uses: softprops/action-gh-release@v2
-        with:
-          files: app/build/outputs/apk/release/*.apk

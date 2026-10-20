@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_widget"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="14dp">
+
+    <ImageView
+        android:id="@+id/wGauge"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:contentDescription="RAM" />
+
+    <LinearLayout
+        android:id="@+id/wInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/wTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RAM terpakai"
+            android:textColor="#A5B4FC"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/wRam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-- / --"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/wTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="🌡 --"
+            android:textColor="#C7D2FE"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/wBoost"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/bg_widget_btn"
+        android:gravity="center"
+        android:text="🚀"
+        android:textSize="24sp" />
+</LinearLayout>
